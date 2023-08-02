@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using NDHTHI.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<NDHTHIContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("NDHTHIContext") ?? throw new InvalidOperationException("Connection string 'NDHTHIContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
